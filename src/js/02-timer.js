@@ -28,7 +28,6 @@ option={
         else {
             refs.btnRef.disabled = false;
 
-            // differenceTime = selectedDates[0].getTime() - data.getTime();
             refs.btnRef.addEventListener('click', ()=>{
                 const timerId = setInterval(()=>{
                     const time = new Date();
@@ -37,7 +36,6 @@ option={
                         refs.btnRef.disabled = true;
                     }
                     changeTextTimer(convertMs(selectedDates[0].getTime() - time.getTime()))
-                    // addLeadingZero();
                     // console.log(convertMs(selectedDates[0].getTime() - time.getTime()))
                 },DELAY);
             })
@@ -45,7 +43,6 @@ option={
     },
 
 })
-
 
 function convertMs(ms) {
     // Number of milliseconds per unit of time
@@ -68,6 +65,7 @@ function changeTextTimer({days, hours, minutes, seconds}) {
         refs.spanMinute.textContent = minutes.toString === 1? minutes: addLeadingZero(minutes);
         refs.spanSecond.textContent = seconds.toString === 1? seconds: addLeadingZero(seconds);
 }
+
 function addLeadingZero(value) {
     return value.toString().padStart(2,0);
     // console.log(value.toString().padStart(2,0))
