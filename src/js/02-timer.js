@@ -14,7 +14,7 @@ const DELAY = 1000;
 refs.btnRef.disabled = true;
 
 flatpickr('#datetime-picker',
-option={
+{
     enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
