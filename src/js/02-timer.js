@@ -63,6 +63,7 @@ function convertMs(ms) {
 }
 
 function changeTextTimer({days, hours, minutes, seconds}) {
+    // console.log(days)
         refs.spanDays.textContent = days;
         refs.spanHour.textContent = hours;
         refs.spanMinute.textContent = minutes;
@@ -80,4 +81,4 @@ function changeTextTimer({days, hours, minutes, seconds}) {
     // if(refs.spanDays.textContent )
 // }
 
-console.log("b".padStart(2,0))
+// console.log("b".padStart(2,0))
