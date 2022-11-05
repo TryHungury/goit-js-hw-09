@@ -10,12 +10,8 @@ const refs = {
     spanSecond: document.querySelector("[data-seconds]")
 }
 
-refs.btnRef.disabled = true;
-
 const DELAY = 1000;
-
-let differenceTime = null;
-// console.log(refs.btnRef)
+refs.btnRef.disabled = true;
 
 flatpickr('#datetime-picker',
 option={
@@ -34,11 +30,15 @@ option={
 
             // differenceTime = selectedDates[0].getTime() - data.getTime();
             refs.btnRef.addEventListener('click', ()=>{
-                setInterval(()=>{
+                const timerId = setInterval(()=>{
                     const time = new Date();
+                    if ((selectedDates[0].getTime()/1000)-1 === parseInt(time.getTime()/1000)) {
+                        clearInterval(timerId);
+                        refs.btnRef.disabled = true;
+                    }
                     changeTextTimer(convertMs(selectedDates[0].getTime() - time.getTime()))
                     // addLeadingZero();
-                    console.log(convertMs(selectedDates[0].getTime() - time.getTime()))
+                    // console.log(convertMs(selectedDates[0].getTime() - time.getTime()))
                 },DELAY);
             })
         }
@@ -63,22 +63,12 @@ function convertMs(ms) {
 }
 
 function changeTextTimer({days, hours, minutes, seconds}) {
-    // console.log(days)
-        refs.spanDays.textContent = days;
-        refs.spanHour.textContent = hours;
-        refs.spanMinute.textContent = minutes;
-        refs.spanSecond.textContent = seconds;
- 
-    // console.log(days.toString().length === 1)
+        refs.spanDays.textContent = days.toString === 1? days: addLeadingZero(days);
+        refs.spanHour.textContent = hours.toString === 1? hours: addLeadingZero(hours);
+        refs.spanMinute.textContent = minutes.toString === 1? minutes: addLeadingZero(minutes);
+        refs.spanSecond.textContent = seconds.toString === 1? seconds: addLeadingZero(seconds);
 }
-// function addLeadingZero() {
-//     refs.spanDays.textContent.toString().padStart(3,0);
-//     refs.spanHour.textContent.toString().padStart(2,0);
-//     refs.spanMinute.textContent.toString().padStart(2,0);
-//     refs.spanSecond.textContent.toString().padStart(2,0);
-// }
-// function additionalNum() {
-    // if(refs.spanDays.textContent )
-// }
-
-// console.log("b".padStart(2,0))
+function addLeadingZero(value) {
+    return value.toString().padStart(2,0);
+    // console.log(value.toString().padStart(2,0))
+}
