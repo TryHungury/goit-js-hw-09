@@ -21,7 +21,7 @@ flatpickr('#datetime-picker',
     minuteIncrement: 1,
     onClose(selectedDates) {
         const data = new Date();
-        console.log("🚀data", data)
+        // console.log("🚀data", data)
         if(data >= selectedDates[0]) {
             window.alert("Please choose a date in the future")
         }
